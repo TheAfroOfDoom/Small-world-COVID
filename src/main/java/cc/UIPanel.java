@@ -18,7 +18,7 @@ public class UIPanel extends JPanel implements ActionListener {
     public int width;
     public boolean active;
     public boolean restart;
-    public int scale;
+    public volatile int scale;
 
     public UIPanel() {
         super();

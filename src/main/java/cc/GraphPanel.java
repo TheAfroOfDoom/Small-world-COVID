@@ -1,12 +1,9 @@
 package cc;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-
-import java.awt.event.ActionEvent;
 
 import java.awt.Color;
 import javax.swing.BorderFactory;
@@ -23,15 +20,15 @@ public class GraphPanel extends JPanel {
     double maxRadius;
     int dimension;
     int nVerts;
-    double scale;
+    volatile double scale;
     HyperbolicRandomGraphGenerator hrgg;
 
-    int mouseX1;
-    int mouseY1;
-    int panelX1;
-    int panelY1;
-    int offsetX;
-    int offsetY;
+    volatile int mouseX1;
+    volatile int mouseY1;
+    volatile int panelX1;
+    volatile int panelY1;
+    volatile int offsetX;
+    volatile int offsetY;
 
     public GraphPanel(int nVerts, double averageDegree) {
         super();
@@ -49,6 +46,8 @@ public class GraphPanel extends JPanel {
         verts = new ArrayList<Vertex>(Arrays.asList(hrgg.getCopy()));
         infectedVerts = new ArrayList<>();
         update(true);
+
+
 
         addMouseListener(new MouseListener() {
 
