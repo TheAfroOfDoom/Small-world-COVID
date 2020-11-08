@@ -100,7 +100,13 @@ public class GraphPanel extends JPanel {
         }
         for (Vertex vert : this.verts) {
             for (int index : vert.connections) {
-                g.setColor(new Color(0, 0, 0, 50));
+                if(vert.active && verts.get(index).active) {
+                    // red (spread)
+                    g.setColor(new Color(255, 0, 0, 50));
+                } else {
+                    // gray
+                    g.setColor(new Color(0, 0, 0, 50));
+                }
                 g.drawLine(vert.x, vert.y, verts.get(index).x, verts.get(index).y);
             }
         }
@@ -123,20 +129,27 @@ public class GraphPanel extends JPanel {
             infectedVerts.add(verts.get(index));
         } else {
             frameNumber++;
-            ArrayList<Integer> exposed = new ArrayList<>();
+            ArrayList<Vertex> newInfected = new ArrayList<>();
+
             for (Vertex infVert : infectedVerts) {
+                infVert.active = false;
                 int randomConnect = infVert.connections.get((int) (Math.random() * infVert.connections.size()));
-                exposed.add(randomConnect);
-            }
-            for (Integer vertIdx : exposed) {
-                Vertex vertExposed = verts.get(vertIdx);
+                Vertex vertExposed = verts.get(randomConnect);
                 vertExposed.exposed++;
-                if (Math.random() > 0.75) {
-                    if (!infectedVerts.contains(vertExposed)) {
+
+                if (Math.random() < 0.25) {
+                    if (!vertExposed.infected && !newInfected.contains(vertExposed)) {
                         vertExposed.infected = true;
-                        infectedVerts.add(vertExposed);
+                        vertExposed.active = true;
+                        infVert.active = true;
+
+                        newInfected.add(vertExposed);
                     }
                 }
+            }
+
+            for (Vertex newInf : newInfected) {
+                infectedVerts.add(newInf);
             }
         }
     }
