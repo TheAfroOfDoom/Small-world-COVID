@@ -33,11 +33,11 @@ public class Vertex {
     }
 
     public void draw(Graphics g) {
-        int scale = 20;
+        double scale = 20;
         draw(g, scale);
     }
 
-    public void draw(Graphics g, int scale) {
+    public void draw(Graphics g, double scale) {
         Color prevColor = g.getColor();
         x = 400 + (int) (scale * this.radius * Math.cos(angle));
         y = 400 + (int) (scale * this.radius * Math.sin(angle));

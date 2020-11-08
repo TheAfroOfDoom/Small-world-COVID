@@ -17,24 +17,20 @@ public class GraphPanel extends JPanel {
     int maxRadius;
     int dimension;
     int nVerts;
-    int scale;
+    double scale;
     HyperbolicRandomGraphGenerator hrgg;
 
     public GraphPanel(int nVerts) {
-        this(nVerts, 30);
-    }
-
-    public GraphPanel(int nVerts, int scale) {
         super();
         frameNumber = 0;
         dimension = 800;
         setPreferredSize(new Dimension(dimension, dimension));
         setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 30));
-        this.scale = scale;
 
         double averageDegree = 5;
         double curvature = -1;
         hrgg = new HyperbolicRandomGraphGenerator(nVerts, averageDegree, curvature);
+        this.scale = (dimension / 2) / hrgg.getMaxRadius();
 
         maxRadius = (int) hrgg.getMaxRadius();
         this.nVerts = nVerts;
@@ -62,7 +58,8 @@ public class GraphPanel extends JPanel {
         for (Vertex vert : this.verts) {
             vert.draw(g, scale);
         }
-        g.drawOval((dimension / 2) - scale * maxRadius, (dimension / 2) - scale * maxRadius, scale * 2 * maxRadius, scale * 2 * maxRadius);
+        int smr = (int) (scale * maxRadius);
+        g.drawOval((dimension / 2) - smr, (dimension / 2) - smr, 2 * smr, 2 * smr);
         g.drawString("frame:", 50, 740);
         g.drawString(String.valueOf(frameNumber), 50, 750);
         g.drawString("% inf:", 50, 720);
