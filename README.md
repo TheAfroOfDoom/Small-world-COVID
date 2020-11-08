@@ -1,8 +1,10 @@
 # COVID-19 County Visualizer
 Jordan Williams, Aidan Tokarski
 
-## Executable
-Compile and run with maven, or run the provided executable for convenience. (you should probably use maven)
+## How to run
+Compile and package the jar with maven: `mvn package`
+
+Then run the jar with `java -jar ./target/cc-1.0.jar`
 
 ## Inspiration
 Jordan took a small world networks math class during the Fall 2020 semester, and became interested in the idea of modelling COVID-19 using them (SWNs are good to model social networks).
