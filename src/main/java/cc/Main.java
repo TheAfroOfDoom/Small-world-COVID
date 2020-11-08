@@ -17,10 +17,12 @@ public class Main {
                     uiPanel.restart = false;
                     win.repaint();
                 }
-                Thread.sleep(10);
+                Thread.sleep(1);
+                gPanel.scale = uiPanel.scale;
             }
             while (uiPanel.active) {
                 Thread.sleep(250);
+                gPanel.scale = uiPanel.scale;
                 gPanel.update(false);
                 win.repaint();
             }
