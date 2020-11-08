@@ -11,6 +11,12 @@ public class Vertex {
     public int radius;
     public int angle;
 
+    Vertex(int maxRadius){
+        PolarPosition pp = new PolarPosition(maxRadius);
+        this.radius = (int) pp.getRadius();
+        this.radius = (int) pp.getAngle();
+    }
+
     Vertex(int radius, int angle){
         this.radius = radius;
         this.angle = angle;
@@ -20,7 +26,7 @@ public class Vertex {
         int x = (int) ((double) this.radius * Math.cos(angle));
         int y = (int) ((double) this.radius * Math.sin(angle));
 
-        g.fillOval(x - SIZE_RADIUS, y - SIZE_RADIUS, SIZE, SIZE);
+        g.fillOval(400 + x - SIZE_RADIUS, 400 + y - SIZE_RADIUS, SIZE, SIZE);
     }
 
 }

@@ -10,16 +10,20 @@ public class BasicDisplay extends Canvas {
 
     public void paint(Graphics g) {
         int size = 10;
-        Set<DefaultEdge> edges = GraphGenerator.generate(size);
+        int maxRadius = 300;
+        //Set<DefaultEdge> edges = GraphGenerator.generate(size);
         Vertex[] verts = new Vertex[size];
         for (int i = 0; i < size; i++) {
-            verts[i] = new Vertex((int) (100 + Math.random() * 600), (int) (100 + Math.random() * 600));
+            verts[i] = new Vertex(maxRadius);
+            System.out.format("%d %d%n", verts[i].radius, verts[i].angle);
             verts[i].draw(g);
         }
+        /*
         for (DefaultEdge edge : edges) {
             int[] vNums = vNums(edge);
             g.drawLine(verts[vNums[0]].x, verts[vNums[0]].y, verts[vNums[1]].x, verts[vNums[1]].y);
         }
+        */
     }
 
     public static int[] vNums(DefaultEdge edge){
