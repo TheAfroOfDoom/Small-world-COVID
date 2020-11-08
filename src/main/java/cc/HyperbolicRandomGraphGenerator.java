@@ -5,12 +5,6 @@ package cc;
 
 import java.lang.Math;
 import java.util.*;
-import java.util.function.*;
-
-import org.jgrapht.*;
-import org.jgrapht.generate.*;
-import org.jgrapht.graph.*;
-import org.jgrapht.util.*;
 
 public final class HyperbolicRandomGraphGenerator
 // implements
@@ -75,8 +69,8 @@ public final class HyperbolicRandomGraphGenerator
         // v = Math.PI * this.k / 8;
         // n = v * Math.exp(maxRadius / 2) => n / v = Math.exp(...) => 2 * Math.log(n /
         // v) = maxRadius
-        // this.maxRadius = 2 * Math.log(this.n / (Math.PI * this.k / 8));
-        this.maxRadius = 8;
+        this.maxRadius = 2 * Math.log(this.n / (Math.PI * this.k / 8));
+        //this.maxRadius = 8;
 
         GenerateVertices();
         GenerateEdges();
