@@ -30,6 +30,7 @@ public class Main {
                 Thread.sleep(250);
                 gPanel.scale = uiPanel.scale;
                 gPanel.toggleExposure = uiPanel.toggleExpo;
+                gPanel.toggleMask = uiPanel.toggleMask;
                 gPanel.update(false);
                 win.repaint();
             }

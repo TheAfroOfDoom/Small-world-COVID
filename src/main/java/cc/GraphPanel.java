@@ -14,6 +14,11 @@ import java.util.Arrays;
 
 public class GraphPanel extends JPanel {
 
+    private static final double SPREAD_DEFAULT = 17.4;
+    private static final double SPREAD_MASK = 3.1;
+    private static final double SPREAD_DIST_SUB1M = 12.8;
+    private static final double SPREAD_DIST_OVER1M = 2.6;
+
     ArrayList<Vertex> infectedVerts;
     ArrayList<Vertex> verts;
     int frameNumber;
@@ -23,6 +28,8 @@ public class GraphPanel extends JPanel {
     volatile double scale;
     HyperbolicRandomGraphGenerator hrgg;
     boolean toggleExposure;
+    boolean toggleDistance;
+    boolean toggleMask;
 
     volatile int mouseX1;
     volatile int mouseY1;
@@ -97,7 +104,7 @@ public class GraphPanel extends JPanel {
         }
         for (Vertex vert : this.verts) {
             for (int index : vert.connections) {
-                if(vert.active && verts.get(index).active) {
+                if (vert.active && verts.get(index).active) {
                     // red (spread)
                     g.setColor(new Color(255, 0, 0, 50));
                 } else {
@@ -112,10 +119,10 @@ public class GraphPanel extends JPanel {
         }
         int smr = (int) (scale * maxRadius);
         g.drawOval((dimension / 2) - smr, (dimension / 2) - smr, 2 * smr, 2 * smr);
-        g.drawString("frame:", 50, 740);
-        g.drawString(String.valueOf(frameNumber), 50, 750);
         g.drawString("% inf:", 50, 720);
         g.drawString(String.valueOf(100 * infectedVerts.size() / verts.size()), 50, 730);
+        g.drawString("frame:", 50, 740);
+        g.drawString(String.valueOf(frameNumber), 50, 750);
         g.setColor(prevColor);
     }
 
@@ -133,21 +140,26 @@ public class GraphPanel extends JPanel {
                 int randomConnect = infVert.connections.get((int) (Math.random() * infVert.connections.size()));
                 Vertex vertExposed = verts.get(randomConnect);
                 vertExposed.exposed++;
-
-                if (Math.random() < 0.25) {
+                if (Math.random() * 100 < calcRisk()) {
                     if (!vertExposed.infected && !newInfected.contains(vertExposed)) {
                         vertExposed.infected = true;
                         vertExposed.active = true;
                         infVert.active = true;
-
                         newInfected.add(vertExposed);
                     }
                 }
             }
-
             for (Vertex newInf : newInfected) {
                 infectedVerts.add(newInf);
             }
+        }
+    }
+
+    public double calcRisk() {
+        if (toggleMask) {
+            return SPREAD_MASK;
+        } else {
+            return SPREAD_DEFAULT;
         }
     }
 }

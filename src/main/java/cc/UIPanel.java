@@ -10,6 +10,7 @@ import java.awt.event.ItemEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -19,11 +20,14 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
 
     public int height;
     public int width;
+    private JButton btnStart;
     public boolean active;
     public boolean restart;
     public volatile int scale;
-    private JCheckBox toggleExposure;
+    private JCheckBox checkExpo;
     public boolean toggleExpo;
+    private JCheckBox checkMask;
+    public boolean toggleMask;
 
     public UIPanel() {
         super();
@@ -33,7 +37,7 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
         width = 200;
         setPreferredSize(new Dimension(width, height));
         setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 10));
-        JButton btnStart = new JButton("Start");
+        btnStart = new JButton("Start");
         btnStart.setActionCommand("start");
         btnStart.addActionListener(this);
         add(btnStart, BorderLayout.NORTH);
@@ -42,22 +46,33 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
         btnRestart.addActionListener(this);
         add(btnRestart, BorderLayout.NORTH);
         JSlider sliderScale = new JSlider(JSlider.HORIZONTAL, 10, 110, 50);
+        JLabel lblScale = new JLabel("Scale");
+        lblScale.setLabelFor(sliderScale);
         sliderScale.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 scale = ((JSlider) e.getSource()).getValue();
                 System.out.println(scale);
             }
         });
+        add(lblScale);
         add(sliderScale, BorderLayout.SOUTH);
-        toggleExposure = new JCheckBox("Toggle Exposure Count");
-        toggleExposure.addItemListener(this);
-        add(toggleExposure, BorderLayout.SOUTH);
+        checkExpo = new JCheckBox("Toggle Exposure Count");
+        checkExpo.addItemListener(this);
+        add(checkExpo, BorderLayout.SOUTH);
+        checkMask = new JCheckBox("Toggle Mask Wearing");
+        checkMask.addItemListener(this);
+        add(checkMask, BorderLayout.SOUTH);
     }
 
     public void actionPerformed(ActionEvent e) {
         String cmd = e.getActionCommand();
         if (cmd.equals("start")) {
-            active = true;
+            active = (active) ? false : true;
+            if (active) {
+                btnStart.setText("Stop");
+            } else {
+                btnStart.setText("Start");
+            }
         } else if (cmd.equals("restart")) {
             active = false;
             restart = true;
@@ -66,8 +81,10 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
 
     public void itemStateChanged(ItemEvent e) {
         Object source = e.getItemSelectable();
-        if (source == toggleExposure) {
+        if (source == checkExpo) {
             toggleExpo = (e.getStateChange() == 1) ? true : false;
+        } else if (source == checkMask) {
+            toggleMask = (e.getStateChange() == 1) ? true : false;
         }
     }
 }
