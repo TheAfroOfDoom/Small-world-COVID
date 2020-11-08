@@ -47,12 +47,14 @@ public class GraphPanel extends JPanel {
     }
 
     public void paint(Graphics g) {
+        Color prevColor = g.getColor();
+        for (Vertex vert : this.verts) {
+            vert.calcPos(scale);
+        }
         for (Vertex vert : this.verts) {
             for (int index : vert.connections) {
-                Color prev = g.getColor();
                 g.setColor(new Color(0, 0, 0, 50));
                 g.drawLine(vert.x, vert.y, verts.get(index).x, verts.get(index).y);
-                g.setColor(prev);
             }
         }
         for (Vertex vert : this.verts) {
@@ -64,6 +66,7 @@ public class GraphPanel extends JPanel {
         g.drawString(String.valueOf(frameNumber), 50, 750);
         g.drawString("% inf:", 50, 720);
         g.drawString(String.valueOf(100 * infectedVerts.size() / verts.size()), 50, 730);
+        g.setColor(prevColor);
     }
 
     public void update(boolean init) {

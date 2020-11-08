@@ -32,6 +32,11 @@ public class Vertex {
         this.connections = new ArrayList<>();
     }
 
+    public void calcPos(double scale){
+        x = 400 + (int) (scale * this.radius * Math.cos(angle));
+        y = 400 + (int) (scale * this.radius * Math.sin(angle));
+    }
+
     public void draw(Graphics g) {
         double scale = 20;
         draw(g, scale);
@@ -39,8 +44,6 @@ public class Vertex {
 
     public void draw(Graphics g, double scale) {
         Color prevColor = g.getColor();
-        x = 400 + (int) (scale * this.radius * Math.cos(angle));
-        y = 400 + (int) (scale * this.radius * Math.sin(angle));
         if (infected) {
             g.setColor(new Color(255, 0, 0));
         }
