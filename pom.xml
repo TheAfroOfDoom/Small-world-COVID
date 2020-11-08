@@ -36,6 +36,12 @@
             <artifactId>jgrapht-io</artifactId>
             <version>1.5.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.sis.core/sis-utility -->
+        <dependency>
+            <groupId>org.apache.sis.core</groupId>
+            <artifactId>sis-utility</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
