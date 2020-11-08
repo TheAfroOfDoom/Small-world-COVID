@@ -130,6 +130,7 @@ public class GraphPanel extends JPanel {
             vert.draw(g, scale, toggleExposure);
         }
         int smr = (int) (scale * maxRadius);
+        g.setColor(new Color(0, 0, 0, 175));
         g.drawOval((dimension / 2) - smr, (dimension / 2) - smr, 2 * smr, 2 * smr);
         g.drawString("% inf:", 50, 720);
         g.drawString(String.valueOf(100 * infectedVerts.size() / verts.size()), 50, 730);
