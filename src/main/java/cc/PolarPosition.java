@@ -8,11 +8,7 @@ import java.util.*;
 
 public final class PolarPosition
 {
-<<<<<<< HEAD
-    private final Random rng;
-=======
     //private final Random rng;
->>>>>>> aidan_dev
     private double radius;
     private double angle;
     
@@ -50,11 +46,7 @@ public final class PolarPosition
      */
     public PolarPosition(double maxRadius, Random rng)
     {
-<<<<<<< HEAD
-        this.rng = Objects.requireNonNull(rng);
-=======
         rng = Objects.requireNonNull(rng);
->>>>>>> aidan_dev
         double maxAngle = 2 * Math.PI;
 
         this.radius  = maxRadius * rng.nextDouble();

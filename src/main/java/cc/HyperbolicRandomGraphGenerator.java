@@ -67,7 +67,4 @@ public final class HyperbolicRandomGraphGenerator
         this.k = k;
         this.rng = Objects.requireNonNull(rng);
     }
-
-    @Override
-    public void 
 }
