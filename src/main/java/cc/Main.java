@@ -13,20 +13,23 @@ public class Main {
         uiPanel.scale = (int) gPanel.scale;
         while (true) {
             while (!uiPanel.active) {
-                if(uiPanel.restart){
+                if (uiPanel.restart) {
                     gPanel.reset();
                     uiPanel.restart = false;
-                    win.repaint();
                 }
-                Thread.sleep(1);
-                if(gPanel.scale != uiPanel.scale){
+                if (gPanel.scale != uiPanel.scale) {
                     gPanel.scale = uiPanel.scale;
-                    win.repaint();
                 }
+                if (gPanel.toggleExposure != uiPanel.toggleExpo) {
+                    gPanel.toggleExposure = uiPanel.toggleExpo;
+                }
+                win.repaint();
+                Thread.sleep(1);
             }
             while (uiPanel.active) {
                 Thread.sleep(250);
                 gPanel.scale = uiPanel.scale;
+                gPanel.toggleExposure = uiPanel.toggleExpo;
                 gPanel.update(false);
                 win.repaint();
             }

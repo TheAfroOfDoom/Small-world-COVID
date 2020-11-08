@@ -22,6 +22,7 @@ public class GraphPanel extends JPanel {
     int nVerts;
     volatile double scale;
     HyperbolicRandomGraphGenerator hrgg;
+    boolean toggleExposure;
 
     volatile int mouseX1;
     volatile int mouseY1;
@@ -46,8 +47,6 @@ public class GraphPanel extends JPanel {
         verts = new ArrayList<Vertex>(Arrays.asList(hrgg.getCopy()));
         infectedVerts = new ArrayList<>();
         update(true);
-
-
 
         addMouseListener(new MouseListener() {
 
@@ -81,7 +80,6 @@ public class GraphPanel extends JPanel {
 
             public void mouseMoved(MouseEvent e) {
             }
-
         });
     }
 
@@ -110,7 +108,7 @@ public class GraphPanel extends JPanel {
             }
         }
         for (Vertex vert : this.verts) {
-            vert.draw(g, scale);
+            vert.draw(g, scale, toggleExposure);
         }
         int smr = (int) (scale * maxRadius);
         g.drawOval((dimension / 2) - smr, (dimension / 2) - smr, 2 * smr, 2 * smr);
