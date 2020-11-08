@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.lang.Math;
 import java.util.ArrayList;
 
-public class Vertex {
+public class Vertex implements Comparable<Vertex> {
 
     public static final int SIZE = 6;
     public static final int SIZE_RADIUS = SIZE / 2;
@@ -35,7 +35,11 @@ public class Vertex {
         this.active = false;
     }
 
-    public void calcPos(double scale) {
+    public int compareTo(Vertex v) {
+        return -1 * this.connections.size() - v.connections.size();
+    }
+
+    public void calcPos(double scale){
         x = 400 + (int) (scale * this.radius * Math.cos(angle));
         y = 400 + (int) (scale * this.radius * Math.sin(angle));
     }
