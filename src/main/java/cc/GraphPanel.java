@@ -7,6 +7,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import java.lang.Math;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GraphPanel extends JPanel {
 
@@ -17,6 +18,7 @@ public class GraphPanel extends JPanel {
     int dimension;
     int nVerts;
     int scale;
+    HyperbolicRandomGraphGenerator hrgg;
 
     public GraphPanel(int nVerts) {
         this(nVerts, 30);
@@ -32,15 +34,19 @@ public class GraphPanel extends JPanel {
 
         double averageDegree = 5;
         double curvature = -1;
-        HyperbolicRandomGraphGenerator hrgg = new HyperbolicRandomGraphGenerator(nVerts, averageDegree, curvature);
+        hrgg = new HyperbolicRandomGraphGenerator(nVerts, averageDegree, curvature);
 
         maxRadius = (int) hrgg.getMaxRadius();
         this.nVerts = nVerts;
-        verts = new ArrayList<>();
-        for (Vertex vert : hrgg.vertices) {
-            verts.add(vert);
-        }
+        verts = new ArrayList<Vertex>(Arrays.asList(hrgg.getCopy()));
         infectedVerts = new ArrayList<>();
+        update(true);
+    }
+
+    public void reset() {
+        verts = new ArrayList<Vertex>(Arrays.asList(hrgg.getCopy()));
+        infectedVerts = new ArrayList<>();
+        frameNumber = 0;
         update(true);
     }
 

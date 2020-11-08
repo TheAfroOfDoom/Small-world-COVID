@@ -104,6 +104,19 @@ public final class HyperbolicRandomGraphGenerator
         }
     }
 
+    public Vertex[] getCopy() {
+        Vertex[] vertCopies = new Vertex[vertices.length];
+        for (int i = 0; i < vertices.length; i++) {
+            Vertex vertex = vertices[i];
+            Vertex vertCopy = new Vertex(vertex.radius, vertex.angle);
+            for (Integer conn : vertex.connections) {
+                vertCopy.connections.add(conn.intValue());
+            }
+            vertCopies[i] = vertCopy;
+        }
+        return vertCopies;
+    }
+
     public double HyperbolicDistance(Vertex v1, Vertex v2) {
         double dAngle = Math.PI - Math.abs(Math.PI - Math.abs(v1.angle - v2.angle));
         // approximation
