@@ -36,7 +36,7 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
         active = false;
         restart = false;
         height = 800;
-        width = 250;
+        width = 200;
         setPreferredSize(new Dimension(width, height));
         setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 10));
         btnStart = new JButton("Start");
