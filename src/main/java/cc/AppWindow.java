@@ -11,7 +11,7 @@ public class AppWindow {
     public JFrame frame;
 
     public AppWindow() {
-        frame = new JFrame("Test");
+        frame = new JFrame("HyperCOVID");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
