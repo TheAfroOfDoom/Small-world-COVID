@@ -17,6 +17,7 @@ public class Vertex {
     public int y;
     public ArrayList<Integer> connections;
     public boolean infected;
+    public boolean active;
     public int exposed;
 
     Vertex(double maxRadius) {
@@ -24,12 +25,14 @@ public class Vertex {
         this.radius = pp.getRadius();
         this.angle = pp.getAngle();
         this.connections = new ArrayList<>();
+        this.active = false;
     }
 
     Vertex(double radius, double angle) {
         this.radius = radius;
         this.angle = angle;
         this.connections = new ArrayList<>();
+        this.active = false;
     }
 
     public void calcPos(double scale){
