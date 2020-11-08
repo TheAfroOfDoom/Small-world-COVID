@@ -5,17 +5,17 @@ import java.lang.Math;
 
 public class Vertex {
 
-    public static final int SIZE = 30;
+    public static final int SIZE = 6;
     public static final int SIZE_RADIUS = SIZE / 2;
 
-    public int radius;
+    public double radius;
     public double angle;
     public int x;
     public int y;
 
-    Vertex(int maxRadius){
+    Vertex(double maxRadius){
         PolarPosition pp = new PolarPosition(maxRadius);
-        this.radius = (int) pp.getRadius();
+        this.radius = pp.getRadius();
         this.angle = pp.getAngle();
     }
 
@@ -25,8 +25,8 @@ public class Vertex {
     }
 
     public void draw(Graphics g) {
-        x = 400 + (int) ((double) this.radius * Math.cos(angle));
-        y = 400 + (int) ((double) this.radius * Math.sin(angle));
+        x = (int) (400 + (this.radius * Math.cos(angle)));
+        y = (int) (400 + (this.radius * Math.sin(angle)));
 
         g.fillOval(x - SIZE_RADIUS, y - SIZE_RADIUS, SIZE, SIZE);
     }
