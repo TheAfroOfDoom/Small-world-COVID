@@ -5,6 +5,7 @@ package cc;
 
 import java.lang.Math;
 import java.util.*;
+import org.apache.sis.math.MathFunctions;
 
 public final class PolarPosition
 {
@@ -48,8 +49,9 @@ public final class PolarPosition
     {
         rng = Objects.requireNonNull(rng);
         double maxAngle = 2 * Math.PI;
+        double alpha = 0.6;
 
-        this.radius  = maxRadius * rng.nextDouble();
+        this.radius  = (1/alpha) * MathFunctions.acosh(1 + ((Math.cosh(alpha * maxRadius) - 1) * rng.nextDouble()));
         this.angle   = maxAngle * rng.nextDouble();
     }
 

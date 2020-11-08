@@ -76,7 +76,7 @@ public final class HyperbolicRandomGraphGenerator
         // n = v * Math.exp(maxRadius / 2) => n / v = Math.exp(...) => 2 * Math.log(n /
         // v) = maxRadius
         // this.maxRadius = 2 * Math.log(this.n / (Math.PI * this.k / 8));
-        this.maxRadius = 400;
+        this.maxRadius = 8;
 
         GenerateVertices();
         GenerateEdges();

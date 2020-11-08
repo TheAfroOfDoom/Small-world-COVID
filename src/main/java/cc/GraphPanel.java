@@ -16,13 +16,19 @@ public class GraphPanel extends JPanel {
     int maxRadius;
     int dimension;
     int nVerts;
+    int scale;
 
     public GraphPanel(int nVerts) {
+        this(nVerts, 30);
+    }
+
+    public GraphPanel(int nVerts, int scale) {
         super();
         frameNumber = 0;
         dimension = 800;
         setPreferredSize(new Dimension(dimension, dimension));
         setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 30));
+        this.scale = scale;
 
         double averageDegree = 5;
         double curvature = -1;
@@ -48,9 +54,9 @@ public class GraphPanel extends JPanel {
             }
         }
         for (Vertex vert : this.verts) {
-            vert.draw(g);
+            vert.draw(g, scale);
         }
-        g.drawOval((dimension / 2) - maxRadius, (dimension / 2) - maxRadius, 2 * maxRadius, 2 * maxRadius);
+        g.drawOval((dimension / 2) - scale * maxRadius, (dimension / 2) - scale * maxRadius, scale * 2 * maxRadius, scale * 2 * maxRadius);
         g.drawString("frame:", 50, 740);
         g.drawString(String.valueOf(frameNumber), 50, 750);
         g.drawString("% inf:", 50, 720);
