@@ -25,10 +25,10 @@ public class Vertex {
     }
 
     public void draw(Graphics g) {
-        x = (int) ((double) this.radius * Math.cos(angle));
-        y = (int) ((double) this.radius * Math.sin(angle));
+        x = 400 + (int) ((double) this.radius * Math.cos(angle));
+        y = 400 + (int) ((double) this.radius * Math.sin(angle));
 
-        g.fillOval(400 + x - SIZE_RADIUS, 400 + y - SIZE_RADIUS, SIZE, SIZE);
+        g.fillOval(x - SIZE_RADIUS, y - SIZE_RADIUS, SIZE, SIZE);
     }
 
 }
