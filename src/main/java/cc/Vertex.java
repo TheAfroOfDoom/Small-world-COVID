@@ -39,8 +39,8 @@ public class Vertex {
 
     public void draw(Graphics g, int scale) {
         Color prevColor = g.getColor();
-        x = 400 + scale * (int) (this.radius * Math.cos(angle));
-        y = 400 + scale * (int) (this.radius * Math.sin(angle));
+        x = 400 + (int) (scale * this.radius * Math.cos(angle));
+        y = 400 + (int) (scale * this.radius * Math.sin(angle));
         if (infected) {
             g.setColor(new Color(255, 0, 0));
         }
