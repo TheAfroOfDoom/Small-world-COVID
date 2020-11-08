@@ -4,21 +4,26 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class UIPanel extends JPanel implements ActionListener {
+public class UIPanel extends JPanel implements ActionListener, ItemListener {
 
     public int height;
     public int width;
     public boolean active;
     public boolean restart;
-    public int scale;
+    public volatile int scale;
+    private JCheckBox toggleExposure;
+    public boolean toggleExpo;
 
     public UIPanel() {
         super();
@@ -44,6 +49,9 @@ public class UIPanel extends JPanel implements ActionListener {
             }
         });
         add(sliderScale, BorderLayout.SOUTH);
+        toggleExposure = new JCheckBox("Toggle Exposure Count");
+        toggleExposure.addItemListener(this);
+        add(toggleExposure, BorderLayout.SOUTH);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -53,6 +61,13 @@ public class UIPanel extends JPanel implements ActionListener {
         } else if (cmd.equals("restart")) {
             active = false;
             restart = true;
+        }
+    }
+
+    public void itemStateChanged(ItemEvent e) {
+        Object source = e.getItemSelectable();
+        if (source == toggleExposure) {
+            toggleExpo = (e.getStateChange() == 1) ? true : false;
         }
     }
 }

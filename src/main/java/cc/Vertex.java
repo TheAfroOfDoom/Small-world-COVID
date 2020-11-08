@@ -44,24 +44,26 @@ public class Vertex implements Comparable<Vertex> {
         y = 400 + (int) (scale * this.radius * Math.sin(angle));
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g, boolean tE) {
         double scale = 20;
-        draw(g, scale);
+        draw(g, scale, tE);
     }
 
-    public void draw(Graphics g, double scale) {
+    public void draw(Graphics g, double scale, boolean tE) {
         Color prevColor = g.getColor();
         if (infected) {
             g.setColor(new Color(255, 0, 0));
         }
         g.fillOval(x - SIZE_RADIUS, y - SIZE_RADIUS, SIZE, SIZE);
-        g.setColor(new Color(125, 125, 125));
-        Font prevFont = g.getFont();
-        g.drawString(String.valueOf(exposed), x - SIZE_RADIUS, y - SIZE_RADIUS);
-        //g.setFont(prevFont.deriveFont(prevFont.getSize2D() - 1));
-        //g.setColor(new Color(255, 255, 255));
-        //g.drawString(String.valueOf(exposed), x - SIZE_RADIUS, y - SIZE_RADIUS);
-        g.setFont(prevFont);
+        if (tE) {
+            g.setColor(new Color(125, 125, 125));
+            Font prevFont = g.getFont();
+            g.drawString(String.valueOf(exposed), x - SIZE_RADIUS, y - SIZE_RADIUS);
+            // g.setFont(prevFont.deriveFont(prevFont.getSize2D() - 1));
+            // g.setColor(new Color(255, 255, 255));
+            // g.drawString(String.valueOf(exposed), x - SIZE_RADIUS, y - SIZE_RADIUS);
+            g.setFont(prevFont);
+        }
         g.setColor(prevColor);
     }
 
