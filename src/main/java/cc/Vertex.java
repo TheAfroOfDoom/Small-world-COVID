@@ -10,6 +10,8 @@ public class Vertex {
 
     public int radius;
     public double angle;
+    public int x;
+    public int y;
 
     Vertex(int maxRadius){
         PolarPosition pp = new PolarPosition(maxRadius);
@@ -23,8 +25,8 @@ public class Vertex {
     }
 
     public void draw(Graphics g) {
-        int x = (int) ((double) this.radius * Math.cos(angle));
-        int y = (int) ((double) this.radius * Math.sin(angle));
+        x = (int) ((double) this.radius * Math.cos(angle));
+        y = (int) ((double) this.radius * Math.sin(angle));
 
         g.fillOval(400 + x - SIZE_RADIUS, 400 + y - SIZE_RADIUS, SIZE, SIZE);
     }

@@ -1,28 +1,27 @@
 
 package cc;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
 
 public class AppWindow {
 
-    private JFrame frame;
+    public JFrame frame;
 
-    private AppWindow() {
+    public AppWindow() {
         frame = new JFrame("Test");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    public void add(Component comp){
+        frame.add(comp, BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);
-    }    
+    }
 
-    public static void main(String[] args) throws InterruptedException {
-        AppWindow win = new AppWindow();
+    public void repaint() {
+        frame.repaint();
     }
 }
