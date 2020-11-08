@@ -9,13 +9,16 @@ public class GraphPanel extends JPanel {
 
     Vertex[] verts;
     int[][] edgeArray;
+    int maxRadius;
+    int dimension;
 
     public GraphPanel(int nVerts) {
         super();
-        setPreferredSize(new Dimension(800, 800));
+        dimension = 800;
+        setPreferredSize(new Dimension(dimension, dimension));
         setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 10));
         int size = 10;
-        int maxRadius = 300;
+        maxRadius = 300;
         edgeArray = GraphGenerator.generate(size);
         verts = new Vertex[size];
         for (int i = 0; i < verts.length; i++) {
@@ -30,5 +33,6 @@ public class GraphPanel extends JPanel {
         for (int[] edge : edgeArray) {
             g.drawLine(verts[edge[0]].x, verts[edge[0]].y, verts[edge[1]].x, verts[edge[1]].y);
         }
+        g.drawOval((dimension / 2) - maxRadius, (dimension / 2) - maxRadius, 2 * maxRadius, 2 * maxRadius);
     }
 }
