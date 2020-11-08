@@ -15,8 +15,14 @@ public class AppWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void add(Component comp) {
+    public void addGraphPanel(Component comp) {
         frame.add(comp, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public void addUIPanel(Component comp) {
+        frame.add(comp, BorderLayout.WEST);
         frame.pack();
         frame.setVisible(true);
     }

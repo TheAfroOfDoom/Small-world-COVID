@@ -22,7 +22,7 @@ public class GraphPanel extends JPanel {
         frameNumber = 0;
         dimension = 800;
         setPreferredSize(new Dimension(dimension, dimension));
-        setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 10));
+        setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 30));
 
         double averageDegree = 5;
         double curvature = -1;
