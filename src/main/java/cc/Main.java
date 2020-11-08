@@ -10,6 +10,7 @@ public class Main {
         AppWindow win = new AppWindow();
         win.addGraphPanel(gPanel);
         win.addUIPanel(uiPanel);
+        uiPanel.scale = (int) gPanel.scale;
         while (true) {
             while (!uiPanel.active) {
                 if(uiPanel.restart){
@@ -18,7 +19,10 @@ public class Main {
                     win.repaint();
                 }
                 Thread.sleep(1);
-                gPanel.scale = uiPanel.scale;
+                if(gPanel.scale != uiPanel.scale){
+                    gPanel.scale = uiPanel.scale;
+                    win.repaint();
+                }
             }
             while (uiPanel.active) {
                 Thread.sleep(250);

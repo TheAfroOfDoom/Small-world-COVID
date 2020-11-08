@@ -1,6 +1,12 @@
 package cc;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+
+import java.awt.event.ActionEvent;
 
 import java.awt.Color;
 import javax.swing.BorderFactory;
@@ -20,6 +26,13 @@ public class GraphPanel extends JPanel {
     double scale;
     HyperbolicRandomGraphGenerator hrgg;
 
+    int mouseX1;
+    int mouseY1;
+    int panelX1;
+    int panelY1;
+    int offsetX;
+    int offsetY;
+
     public GraphPanel(int nVerts, double averageDegree) {
         super();
         frameNumber = 0;
@@ -36,6 +49,41 @@ public class GraphPanel extends JPanel {
         verts = new ArrayList<Vertex>(Arrays.asList(hrgg.getCopy()));
         infectedVerts = new ArrayList<>();
         update(true);
+
+        addMouseListener(new MouseListener() {
+
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            public void mousePressed(MouseEvent e) {
+                mouseX1 = e.getXOnScreen();
+                mouseY1 = e.getYOnScreen();
+                panelX1 = getX();
+                panelY1 = getY();
+            }
+
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            public void mouseExited(MouseEvent e) {
+            }
+
+        });
+        addMouseMotionListener(new MouseMotionListener() {
+
+            public void mouseDragged(MouseEvent e) {
+                offsetX = e.getXOnScreen() - mouseX1;
+                offsetY = e.getYOnScreen() - mouseY1;
+                setLocation(panelX1 + offsetX, panelY1 + offsetY);
+            }
+
+            public void mouseMoved(MouseEvent e) {
+            }
+
+        });
     }
 
     public void reset() {

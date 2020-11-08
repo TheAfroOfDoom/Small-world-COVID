@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.ActionMap;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -37,7 +36,7 @@ public class UIPanel extends JPanel implements ActionListener {
         btnRestart.setActionCommand("restart");
         btnRestart.addActionListener(this);
         add(btnRestart, BorderLayout.NORTH);
-        JSlider sliderScale = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
+        JSlider sliderScale = new JSlider(JSlider.HORIZONTAL, 10, 110, 50);
         sliderScale.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 scale = ((JSlider) e.getSource()).getValue();
