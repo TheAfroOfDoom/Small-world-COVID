@@ -102,6 +102,7 @@ public final class HyperbolicRandomGraphGenerator
                 }
             }
         }
+        PrintVertexDegrees();
     }
 
     public Vertex[] getCopy() {
@@ -118,8 +119,18 @@ public final class HyperbolicRandomGraphGenerator
     }
 
     public double HyperbolicDistance(Vertex v1, Vertex v2) {
+        return HyperbolicDistance(v1, v2, zeta);
+    }
+
+    public static double HyperbolicDistance(Vertex v1, Vertex v2, double zeta) {
         double dAngle = Math.PI - Math.abs(Math.PI - Math.abs(v1.angle - v2.angle));
         // approximation
-        return v1.radius + v2.radius + (2 * Math.log(dAngle / 2) / this.zeta);
+        return v1.radius + v2.radius + (2 * Math.log(dAngle / 2) / zeta);
+    }
+
+    public void PrintVertexDegrees() {
+        for (int i = 0; i < vertices.length; i++) {
+            System.out.format("%d degree %d%n", i, vertices[i].connections.size());
+        }
     }
 }
