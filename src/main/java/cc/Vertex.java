@@ -1,7 +1,9 @@
 package cc;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.lang.Math;
+import java.util.ArrayList;
 
 public class Vertex {
 
@@ -12,23 +14,31 @@ public class Vertex {
     public double angle;
     public int x;
     public int y;
+    public ArrayList<Integer> connections;
+    public boolean infected;
 
-    Vertex(double maxRadius){
+    Vertex(double maxRadius) {
         PolarPosition pp = new PolarPosition(maxRadius);
         this.radius = pp.getRadius();
         this.angle = pp.getAngle();
+        this.connections = new ArrayList<>();
     }
 
-    Vertex(int radius, int angle){
+    Vertex(int radius, double angle) {
         this.radius = radius;
         this.angle = angle;
+        this.connections = new ArrayList<>();
     }
 
     public void draw(Graphics g) {
-        x = (int) (400 + (this.radius * Math.cos(angle)));
-        y = (int) (400 + (this.radius * Math.sin(angle)));
-
+        Color prev = g.getColor();
+        x = 400 + (int) (this.radius * Math.cos(angle));
+        y = 400 + (int) (this.radius * Math.sin(angle));
+        if (infected) {
+            g.setColor(new Color(255, 0, 0));
+        }
         g.fillOval(x - SIZE_RADIUS, y - SIZE_RADIUS, SIZE, SIZE);
+        g.setColor(prev);
     }
 
 }
