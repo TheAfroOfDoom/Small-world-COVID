@@ -96,9 +96,8 @@ public final class HyperbolicRandomGraphGenerator
             vertices[i] = new Vertex(this.maxRadius);
         }
     }
-
     
-    public static int[][] GenerateEdges() {
+    public int[][] GenerateEdges() {
         // Create the VertexFactory so the generator can create vertices
         Supplier<String> vSupplier = new Supplier<String>() {
             private int id = 0;
@@ -114,7 +113,7 @@ public final class HyperbolicRandomGraphGenerator
                 SupplierUtil.createDefaultEdgeSupplier(), false);
 
         // Create the CompleteGraphGenerator object
-        CompleteGraphGenerator<String, DefaultEdge> completeGenerator = new CompleteGraphGenerator<>(size);
+        CompleteGraphGenerator<String, DefaultEdge> completeGenerator = new CompleteGraphGenerator<>(this.vertices.length);
 
         // Use the CompleteGraphGenerator object to make completeGraph a
         // complete graph with [size] number of vertices
@@ -125,8 +124,13 @@ public final class HyperbolicRandomGraphGenerator
 
     public double HyperbolicDistance(Vertex v1, Vertex v2)
     {
+        return HyperbolicDistance(v1, v2, this.zeta);
+    }
+
+    public static double HyperbolicDistance(Vertex v1, Vertex v2, double zeta)
+    {
         double dAngle = Math.PI - Math.abs(Math.PI - Math.abs(v1.angle - v2.angle));
         // approximation
-        return v1.radius + v2.radius + (2 * Math.log(dAngle / 2) / this.zeta);
+        return v1.radius + v2.radius + (2 * Math.log(dAngle / 2) / zeta);
     }
 }
