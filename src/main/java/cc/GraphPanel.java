@@ -25,6 +25,7 @@ public class GraphPanel extends JPanel {
     double maxRadius;
     int dimension;
     int nVerts;
+    double curvature;
     volatile double scale;
     HyperbolicRandomGraphGenerator hrgg;
     boolean toggleExposure;
@@ -45,11 +46,11 @@ public class GraphPanel extends JPanel {
         setPreferredSize(new Dimension(dimension, dimension));
         setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 30));
 
-        double curvature = -1;
+        curvature = -1;
         hrgg = new HyperbolicRandomGraphGenerator(nVerts, averageDegree, curvature);
         this.scale = (dimension / 2) / hrgg.getMaxRadius();
-
         maxRadius = hrgg.getMaxRadius();
+
         this.nVerts = nVerts;
         verts = new ArrayList<Vertex>(Arrays.asList(hrgg.getCopy()));
         infectedVerts = new ArrayList<>();
@@ -91,6 +92,17 @@ public class GraphPanel extends JPanel {
     }
 
     public void reset() {
+        verts = new ArrayList<Vertex>(Arrays.asList(hrgg.getCopy()));
+        infectedVerts = new ArrayList<>();
+        frameNumber = 0;
+        update(true);
+    }
+
+    public void genNew(int nVerts, double averageDegree){
+        this.nVerts = nVerts;
+        hrgg = new HyperbolicRandomGraphGenerator(nVerts, averageDegree, curvature);
+        this.scale = (dimension / 2) / hrgg.getMaxRadius();
+        maxRadius = hrgg.getMaxRadius();
         verts = new ArrayList<Vertex>(Arrays.asList(hrgg.getCopy()));
         infectedVerts = new ArrayList<>();
         frameNumber = 0;

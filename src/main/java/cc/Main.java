@@ -17,6 +17,10 @@ public class Main {
                     gPanel.reset();
                     uiPanel.restart = false;
                 }
+                if (uiPanel.genNew) {
+                    gPanel.genNew(100, 5);
+                    uiPanel.genNew = false;
+                }
                 if (gPanel.scale != uiPanel.scale) {
                     gPanel.scale = uiPanel.scale;
                 }

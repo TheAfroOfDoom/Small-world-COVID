@@ -23,6 +23,7 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
     private JButton btnStart;
     public boolean active;
     public boolean restart;
+    public boolean genNew;
     public volatile int scale;
     private JCheckBox checkExpo;
     public boolean toggleExpo;
@@ -45,6 +46,10 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
         btnRestart.setActionCommand("restart");
         btnRestart.addActionListener(this);
         add(btnRestart, BorderLayout.NORTH);
+        JButton btnNewGraph = new JButton("Gen New Graph");
+        btnNewGraph.setActionCommand("genNew");
+        btnNewGraph.addActionListener(this);
+        add(btnNewGraph, BorderLayout.NORTH);
         JSlider sliderScale = new JSlider(JSlider.HORIZONTAL, 10, 110, 50);
         JLabel lblScale = new JLabel("Scale");
         lblScale.setLabelFor(sliderScale);
@@ -76,6 +81,10 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
         } else if (cmd.equals("restart")) {
             active = false;
             restart = true;
+        } else if (cmd.equals("genNew")){
+            active = false;
+            genNew = true;
+            btnStart.setText("Start");
         }
     }
 
