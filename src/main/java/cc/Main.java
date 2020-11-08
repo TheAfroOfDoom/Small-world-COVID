@@ -5,7 +5,7 @@ import java.lang.Thread;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        GraphPanel gPanel = new GraphPanel(100, 5);
+        GraphPanel gPanel = new GraphPanel(200, 5);
         UIPanel uiPanel = new UIPanel();
         AppWindow win = new AppWindow();
         win.addGraphPanel(gPanel);
@@ -18,7 +18,7 @@ public class Main {
                     uiPanel.restart = false;
                 }
                 if (uiPanel.genNew) {
-                    gPanel.genNew(100, 5);
+                    gPanel.genNew(200, 5);
                     uiPanel.genNew = false;
                 }
                 if (gPanel.scale != uiPanel.scale) {
@@ -31,7 +31,7 @@ public class Main {
                 Thread.sleep(1);
             }
             while (uiPanel.active) {
-                Thread.sleep(250);
+                Thread.sleep(1050 - uiPanel.speed);
                 gPanel.scale = uiPanel.scale;
                 gPanel.toggleExposure = uiPanel.toggleExpo;
                 gPanel.toggleMask = uiPanel.toggleMask;

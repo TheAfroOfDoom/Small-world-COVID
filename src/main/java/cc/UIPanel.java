@@ -25,6 +25,7 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
     public boolean restart;
     public boolean genNew;
     public volatile int scale;
+    public volatile int speed;
     private JCheckBox checkExpo;
     public boolean toggleExpo;
     private JCheckBox checkMask;
@@ -35,7 +36,7 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
         active = false;
         restart = false;
         height = 800;
-        width = 200;
+        width = 250;
         setPreferredSize(new Dimension(width, height));
         setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 10));
         btnStart = new JButton("Start");
@@ -61,6 +62,17 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
         });
         add(lblScale);
         add(sliderScale, BorderLayout.SOUTH);
+        JSlider sliderSpeed = new JSlider(JSlider.HORIZONTAL, 250, 1000, 500);
+        JLabel lblSpeed = new JLabel("Sim Speed");
+        lblScale.setLabelFor(sliderSpeed);
+        sliderSpeed.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                speed = ((JSlider) e.getSource()).getValue();
+                //System.out.println(scale);
+            }
+        });
+        add(lblSpeed);
+        add(sliderSpeed, BorderLayout.SOUTH);
         checkExpo = new JCheckBox("Toggle Exposure Count");
         checkExpo.addItemListener(this);
         add(checkExpo, BorderLayout.SOUTH);
@@ -81,6 +93,7 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
         } else if (cmd.equals("restart")) {
             active = false;
             restart = true;
+            btnStart.setText("Start");
         } else if (cmd.equals("genNew")){
             active = false;
             genNew = true;
