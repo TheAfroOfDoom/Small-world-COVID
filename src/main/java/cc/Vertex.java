@@ -9,12 +9,12 @@ public class Vertex {
     public static final int SIZE_RADIUS = SIZE / 2;
 
     public int radius;
-    public int angle;
+    public double angle;
 
     Vertex(int maxRadius){
         PolarPosition pp = new PolarPosition(maxRadius);
         this.radius = (int) pp.getRadius();
-        this.radius = (int) pp.getAngle();
+        this.angle = pp.getAngle();
     }
 
     Vertex(int radius, int angle){

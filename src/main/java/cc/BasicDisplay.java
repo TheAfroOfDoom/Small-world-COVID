@@ -15,7 +15,7 @@ public class BasicDisplay extends Canvas {
         Vertex[] verts = new Vertex[size];
         for (int i = 0; i < size; i++) {
             verts[i] = new Vertex(maxRadius);
-            System.out.format("%d %d%n", verts[i].radius, verts[i].angle);
+            System.out.format("%d %.2f%n", verts[i].radius, verts[i].angle);
             verts[i].draw(g);
         }
         /*
