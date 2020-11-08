@@ -123,8 +123,13 @@ public final class HyperbolicRandomGraphGenerator
     }
 
     public void PrintVertexDegrees() {
+        double mean = 0; int deg;
         for (int i = 0; i < vertices.length; i++) {
-            System.out.format("%d degree %d%n", i, vertices[i].connections.size());
+            deg = vertices[i].connections.size();
+            System.out.format("%d degree %d%n", i, deg);
+            mean += deg;
         }
+        mean /= vertices.length;
+        System.out.format("mean degree: %.2f%n", mean);
     }
 }

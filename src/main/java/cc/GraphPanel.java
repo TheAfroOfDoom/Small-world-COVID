@@ -20,14 +20,13 @@ public class GraphPanel extends JPanel {
     double scale;
     HyperbolicRandomGraphGenerator hrgg;
 
-    public GraphPanel(int nVerts) {
+    public GraphPanel(int nVerts, double averageDegree) {
         super();
         frameNumber = 0;
         dimension = 800;
         setPreferredSize(new Dimension(dimension, dimension));
         setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 30));
 
-        double averageDegree = 5;
         double curvature = -1;
         hrgg = new HyperbolicRandomGraphGenerator(nVerts, averageDegree, curvature);
         this.scale = (dimension / 2) / hrgg.getMaxRadius();

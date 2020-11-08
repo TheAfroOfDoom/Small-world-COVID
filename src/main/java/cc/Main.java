@@ -5,7 +5,7 @@ import java.lang.Thread;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        GraphPanel gPanel = new GraphPanel(100);
+        GraphPanel gPanel = new GraphPanel(100, 5);
         UIPanel uiPanel = new UIPanel();
         AppWindow win = new AppWindow();
         win.addGraphPanel(gPanel);
