@@ -26,7 +26,7 @@ public class Vertex {
         this.connections = new ArrayList<>();
     }
 
-    Vertex(int radius, double angle) {
+    Vertex(double radius, double angle) {
         this.radius = radius;
         this.angle = angle;
         this.connections = new ArrayList<>();
