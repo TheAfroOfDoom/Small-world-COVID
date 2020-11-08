@@ -14,25 +14,24 @@ public class GraphPanel extends JPanel {
     ArrayList<Vertex> infectedVerts;
     ArrayList<Vertex> verts;
     int frameNumber;
-    int maxRadius;
+    double maxRadius;
     int dimension;
     int nVerts;
     double scale;
     HyperbolicRandomGraphGenerator hrgg;
 
-    public GraphPanel(int nVerts) {
+    public GraphPanel(int nVerts, double averageDegree) {
         super();
         frameNumber = 0;
         dimension = 800;
         setPreferredSize(new Dimension(dimension, dimension));
         setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 30));
 
-        double averageDegree = 5;
         double curvature = -1;
         hrgg = new HyperbolicRandomGraphGenerator(nVerts, averageDegree, curvature);
         this.scale = (dimension / 2) / hrgg.getMaxRadius();
 
-        maxRadius = (int) hrgg.getMaxRadius();
+        maxRadius = hrgg.getMaxRadius();
         this.nVerts = nVerts;
         verts = new ArrayList<Vertex>(Arrays.asList(hrgg.getCopy()));
         infectedVerts = new ArrayList<>();
