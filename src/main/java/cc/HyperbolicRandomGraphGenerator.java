@@ -96,7 +96,7 @@ public final class HyperbolicRandomGraphGenerator
                 }
             }
         }
-        PrintVertexDegrees();
+        //PrintVertexDegrees();
     }
 
     public Vertex[] getCopy() {

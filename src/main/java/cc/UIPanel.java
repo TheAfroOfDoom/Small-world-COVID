@@ -45,7 +45,7 @@ public class UIPanel extends JPanel implements ActionListener, ItemListener {
         sliderScale.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 scale = ((JSlider) e.getSource()).getValue();
-                System.out.println(scale);
+                //System.out.println(scale);
             }
         });
         add(sliderScale, BorderLayout.SOUTH);
