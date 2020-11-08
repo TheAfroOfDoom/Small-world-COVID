@@ -14,8 +14,8 @@ public class AppWindow {
         frame = new JFrame("Test");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
-    public void add(Component comp){
+
+    public void add(Component comp) {
         frame.add(comp, BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);
