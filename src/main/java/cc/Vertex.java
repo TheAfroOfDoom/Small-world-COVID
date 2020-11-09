@@ -39,9 +39,9 @@ public class Vertex implements Comparable<Vertex> {
         return -1 * this.connections.size() - v.connections.size();
     }
 
-    public void calcPos(double scale){
-        x = 400 + (int) (scale * this.radius * Math.cos(angle));
-        y = 400 + (int) (scale * this.radius * Math.sin(angle));
+    public void calcPos(double scale, double offsetX, double offsetY){
+        x = (int) (offsetX + (scale * this.radius * Math.cos(angle)));
+        y = (int) (offsetY + (scale * this.radius * Math.sin(angle)));
     }
 
     public void draw(Graphics g, boolean tE) {

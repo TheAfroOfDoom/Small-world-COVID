@@ -34,8 +34,6 @@ public class GraphPanel extends JPanel {
 
     volatile int mouseX1;
     volatile int mouseY1;
-    volatile int panelX1;
-    volatile int panelY1;
     volatile int offsetX;
     volatile int offsetY;
 
@@ -44,7 +42,7 @@ public class GraphPanel extends JPanel {
         frameNumber = 0;
         dimension = 800;
         setPreferredSize(new Dimension(dimension, dimension));
-        setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 30));
+        setBorder(BorderFactory.createLineBorder(Color.black));
 
         curvature = -1;
         hrgg = new HyperbolicRandomGraphGenerator(nVerts, averageDegree, curvature);
@@ -64,8 +62,6 @@ public class GraphPanel extends JPanel {
             public void mousePressed(MouseEvent e) {
                 mouseX1 = e.getXOnScreen();
                 mouseY1 = e.getYOnScreen();
-                panelX1 = getX();
-                panelY1 = getY();
             }
 
             public void mouseReleased(MouseEvent e) {
@@ -81,9 +77,16 @@ public class GraphPanel extends JPanel {
         addMouseMotionListener(new MouseMotionListener() {
 
             public void mouseDragged(MouseEvent e) {
-                offsetX = e.getXOnScreen() - mouseX1;
-                offsetY = e.getYOnScreen() - mouseY1;
-                setLocation(panelX1 + offsetX, panelY1 + offsetY);
+                int mouseX2 = e.getXOnScreen();
+                int mouseY2 = e.getYOnScreen();
+
+                offsetX += mouseX2 - mouseX1;
+                offsetY += mouseY2 - mouseY1;
+
+                mouseX1 = mouseX2;
+                mouseY1 = mouseY2;
+                // don't set the PANEL's location; instead just draw the graph with the offsets.
+                //setLocation(panelX1 + offsetX, panelY1 + offsetY);
             }
 
             public void mouseMoved(MouseEvent e) {
@@ -111,10 +114,10 @@ public class GraphPanel extends JPanel {
 
     public void paint(Graphics g) {
         Color prevColor = g.getColor();
+        final int halfDimension = dimension / 2;
         for (Vertex vert : this.verts) {
-            vert.calcPos(scale);
-        }
-        for (Vertex vert : this.verts) {
+            // Update each vertex's cartesian position (x, y)
+            vert.calcPos(scale, halfDimension + offsetX, halfDimension + offsetY);
             for (int index : vert.connections) {
                 if (vert.active && verts.get(index).active) {
                     // red (spread)
@@ -126,12 +129,23 @@ public class GraphPanel extends JPanel {
                 g.drawLine(vert.x, vert.y, verts.get(index).x, verts.get(index).y);
             }
         }
+
+        // Draw vertices over the edges
         for (Vertex vert : this.verts) {
             vert.draw(g, scale, toggleExposure);
         }
+
+        /*
+        // draw blue circle at mouse cursor (not accurate)
+        int msize = 50; int hmsize = msize / 2;
+        g.setColor(Color.blue);
+        g.drawOval(mouseX1 - getX() - hmsize, mouseY1 - getY() - hmsize, msize, msize);
+        //*/
+
         int smr = (int) (scale * maxRadius);
+
         g.setColor(new Color(0, 0, 0, 175));
-        g.drawOval((dimension / 2) - smr, (dimension / 2) - smr, 2 * smr, 2 * smr);
+        g.drawOval(offsetX + halfDimension - smr, offsetY + halfDimension - smr, 2 * smr, 2 * smr);
         g.drawString("% inf:", 50, 720);
         g.drawString(String.valueOf(100 * infectedVerts.size() / verts.size()), 50, 730);
         g.drawString("frame:", 50, 740);
@@ -169,10 +183,6 @@ public class GraphPanel extends JPanel {
     }
 
     public double calcRisk() {
-        if (toggleMask) {
-            return SPREAD_MASK;
-        } else {
-            return SPREAD_DEFAULT;
-        }
+        return toggleMask ? SPREAD_MASK : SPREAD_DEFAULT;
     }
 }
